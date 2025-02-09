@@ -144,7 +144,7 @@ export const riddles = [
     },
     {
         id: "309",
-        question: "I am the reviewr of masks, when i appear friends becomes foe, and the one that you love, becomes the one you hate, what am i ?",
+        question: "I am the reviewer of masks, when i appear friends becomes foe, and the one that you love, becomes the one you hate, what am i ?",
         answer: "betrayer",
         explaination: "when Betrayer is reviewed , friends, family and lover becomes your foe and hate"
     },
