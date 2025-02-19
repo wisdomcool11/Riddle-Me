@@ -1,0 +1,83 @@
+
+
+
+/* Game Over */
+.game-over {
+    width: 400px;
+    background-color: #555;
+    border-radius: 0.555rem ;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* postion */
+    position: absolute;
+}
+
+.game-over-wrap{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+.score-record{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.score-record .wins{
+    color: tomato;
+    font-weight: 700;
+    font-family: cursive;
+}
+.score-record .loss{
+    color: springgreen;
+    font-weight: 700;
+    font-family: cursive;
+}
+
+.score{
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+
+/*  accessement commnet */
+.accessement-comment {
+    color: aliceblue;
+    width: 100%;
+    text-align: center;
+}
+
+.game-over-button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.game-btn{
+    width: 125px;
+    height: 35px;
+    border-radius: 0.555rem;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.game-btn:active {
+    background-color: #777;
+}
+
