@@ -189,7 +189,7 @@
 
 
 // importing files  
-import { riddles } from "../script/riddles.js";  
+import {riddles} from "../script/riddles.js";  
 
 let riddleHtml = '';  
 
@@ -224,6 +224,11 @@ riddles.forEach((riddle) => {
                 <a href="#" class="previous button js-previous">  
                     Previous  
                 </a>  
+
+                <a href="#" class="tired button">
+                    Tired ?
+                </a>
+
                 <a href="#" class="next-btn button js-next">  
                     Next  
                 </a>  
@@ -243,15 +248,21 @@ displayRiddle();
 function displayRiddle() {  
     const currentRiddle = riddles[currentRiddleIndex];  
 
-    document.querySelector('.js-question').innerHTML = currentRiddle.question;  
+    document.querySelector('.js-question').innerHTML= currentRiddle.question;  
 
-    document.querySelector('.js-answer').innerHTML = currentRiddle.answer;  
+    document.querySelector('.js-answer').innerHTML= currentRiddle.answer;  
 }  
 
 // next riddle link
 document.querySelectorAll('.js-next').forEach((link) => {  
     link.addEventListener('click', (e) => {  
         e.preventDefault(); // Prevent default anchor behavior
+
+        let previousRiddleIndex = currentRiddleIndex;
+
+        do{
+            currentRiddleIndex = Math.floor(Math.random () * riddles.length);
+        }while (currentRiddleIndex === previousRiddleIndex);
 
         if (currentRiddleIndex < riddles.length - 1) {  
             currentRiddleIndex++;  
@@ -292,8 +303,13 @@ document.querySelectorAll('.js-previous').forEach((link) => {
 
 
 
+let scoreHtml = '';
 // Answer display  
 document.querySelectorAll('.js-answer-btn').forEach((button) => {  
+    
+    let win = 0;
+    let loss = 0;
+
     button.addEventListener('click', () => {  
         const riddleId = button.dataset.riddleId; 
 
@@ -301,28 +317,51 @@ document.querySelectorAll('.js-answer-btn').forEach((button) => {
 
         const answer = document.querySelector('.js-answer');
 
-        const inputValue = inputElement.value.trim(); 
+        const inputValue = inputElement.value.trim().toLowerCase(); 
 
         const currentRiddle = riddles[currentRiddleIndex];  
 
         if (inputValue === currentRiddle.answer) {  
             inputElement.style.color = 'green'; 
      
-            answer.classList.toggle('showAnswer');
+            answer.classList.add('showAnswer');
+            win += 1;
+            console.log(win);
 
-            console.log('Correct answer!');  
         } else {  
             inputElement.style.color = 'red';  
-            console.log('Incorrect answer.');  
+             loss += 1;
+             console.log(loss);
         }  
+
+        scoreHtml = ` 
+            <span class="wins">
+                Wins : <span class="score-win js-score-win">
+                    ${win}
+                </span>
+            </span>,
+            
+            <span class="loss">
+                Loss : <span class="score-loss js-score-loss">
+                    ${loss}
+                </span>
+            </span>
+        `;
+
+        document.querySelector('.js-scores').innerHTML= scoreHtml;
+        
     });  
+    
 });  
 
-// Search function  
-document.querySelector('.js-input-answer').addEventListener('input', (e) => {  
 
-    const searchValue = e.target.value.trim().toLowerCase();  
-    const matches = riddles.filter(riddle => riddle.name.toLowerCase().includes(searchValue));  
-    console.log('Matches:', matches); 
+
+
+// Search function  
+// document.querySelector('.js-input-answer').addEventListener('input', (e) => {  
+
+//     const searchValue = e.target.value.trim().toLowerCase();  
+//     const matches = riddles.filter(riddle => riddle.name.toLowerCase().includes(searchValue));  
+//     console.log('Matches:', matches); 
      
-});
+// });

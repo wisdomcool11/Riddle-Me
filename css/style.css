@@ -25,6 +25,14 @@ body{
     margin-top: 2rem;
 }
 
+.header{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .riddle-wrap{
     width: 100%;
     height: 100%;
