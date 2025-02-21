@@ -225,7 +225,7 @@ riddles.forEach((riddle) => {
                     Previous  
                 </a>  
 
-                <a href="#" class="tired button">
+                <a href="#" class="tired button js-tired">
                     Tired ?
                 </a>
 
@@ -304,11 +304,20 @@ document.querySelectorAll('.js-previous').forEach((link) => {
 
 
 let scoreHtml = '';
+let isWorking = false;
+
+const score = {
+    win: 0,
+    loss: 0
+}
+
+localStorage.getItem('score', JSON.stringify(score))
+
 // Answer display  
 document.querySelectorAll('.js-answer-btn').forEach((button) => {  
     
-    let win = 0;
-    let loss = 0;
+    // let win = 0;
+    // let loss = 0;
 
     button.addEventListener('click', () => {  
         const riddleId = button.dataset.riddleId; 
@@ -325,36 +334,57 @@ document.querySelectorAll('.js-answer-btn').forEach((button) => {
             inputElement.style.color = 'green'; 
      
             answer.classList.add('showAnswer');
-            win += 1;
-            console.log(win);
+            score.win += 1;
 
         } else {  
             inputElement.style.color = 'red';  
-             loss += 1;
-             console.log(loss);
+            score.loss += 1;
         }  
 
-        scoreHtml = ` 
-            <span class="wins">
-                Wins : <span class="score-win js-score-win">
-                    ${win}
-                </span>
-            </span>,
-            
-            <span class="loss">
-                Loss : <span class="score-loss js-score-loss">
-                    ${loss}
-                </span>
-            </span>
-        `;
+        let winScore = score.win;
+        let lossScore = score.loss;
 
-        document.querySelector('.js-scores').innerHTML= scoreHtml;
+        // get the score inside the obj and update it from the game output.
+        
+        getScore(winScore, lossScore);
         
     });  
     
 });  
 
 
+function getScore(win, loss){
+    scoreHtml = ` 
+        <span class="wins">
+            Wins : <span class="score-win js-score-win">
+                ${win}
+            </span>
+        </span>,
+        
+        <span class="loss">
+            Loss : <span class="score-loss js-score-loss">
+                ${loss}
+            </span>
+        </span>
+    `;
+
+    document.querySelector('.js-scores').innerHTML= scoreHtml;
+
+    //  Tired button that bring game over pop up
+    document.querySelector('.js-tired').addEventListener('click', ()=> {
+        const gameOver = document.querySelector('.js-game-over');
+    
+        gameOver.classList.toggle('game-over-display')
+    
+        document.querySelector('.js-game-over-win').innerText= win;
+    
+        document.querySelector('.js-game-over-loss').innerText= loss;
+
+    })
+}
+
+
+// function
 
 
 // Search function  

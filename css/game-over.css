@@ -13,6 +13,14 @@
 
     /* postion */
     position: absolute;
+
+    display: none ;
+    transition : display 600ms ease-in ;
+}
+
+.game-over-display.game-over{
+    display: block;
+    transition: display 600ms ease-in;
 }
 
 .game-over-wrap{
@@ -80,4 +88,3 @@
 .game-btn:active {
     background-color: #777;
 }
-
