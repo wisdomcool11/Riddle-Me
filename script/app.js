@@ -254,64 +254,79 @@ function displayRiddle() {
 }  
 
 // next riddle link
-document.querySelectorAll('.js-next').forEach((link) => {  
-    link.addEventListener('click', (e) => {  
-        e.preventDefault(); // Prevent default anchor behavior
+getNextButton();
 
-        let previousRiddleIndex = currentRiddleIndex;
-
-        do{
-            currentRiddleIndex = Math.floor(Math.random () * riddles.length);
-        }while (currentRiddleIndex === previousRiddleIndex);
-
-        if (currentRiddleIndex < riddles.length - 1) {  
-            currentRiddleIndex++;  
-            riddleHistory.push(currentRiddleIndex);  
-
-            const inputElement = document.querySelector(`.js-input-answer`);  
-
-            inputElement.value = '';
-
-            const answer = document.querySelector('.js-answer');
-            answer.classList.remove('showAnswer');
-
-            displayRiddle();  
-        }  
+function getNextButton (){
+    document.querySelectorAll('.js-next').forEach((link) => {  
+        link.addEventListener('click', (e) => {  
+            e.preventDefault(); // Prevent default anchor behavior
+    
+            let previousRiddleIndex = currentRiddleIndex;
+    
+            do{
+                currentRiddleIndex = Math.floor(Math.random () * riddles.length);
+            }while (currentRiddleIndex === previousRiddleIndex);
+    
+            if (currentRiddleIndex < riddles.length - 1) {  
+                currentRiddleIndex++;  
+                riddleHistory.push(currentRiddleIndex);  
+    
+                const inputElement = document.querySelector(`.js-input-answer`);  
+    
+                inputElement.value = '';
+    
+                const answer = document.querySelector('.js-answer');
+                answer.classList.remove('showAnswer');
+    
+                displayRiddle();  
+            }  
+        });  
     });  
-});  
+
+}
 
 
 // previous riddle link 
-document.querySelectorAll('.js-previous').forEach((link) => {  
-    link.addEventListener('click', (e) => {  
-        e.preventDefault(); // Prevent default anchor behavior  
-        if (riddleHistory.length > 1) {  
-            riddleHistory.pop();  
-            currentRiddleIndex = riddleHistory[riddleHistory.length - 1];  
+getPreviousButton ();
 
-            const inputElement = document.querySelector(`.js-input-answer`);  
-
-            inputElement.value = '';
-
-            const answer = document.querySelector('.js-answer');
-            answer.classList.remove('showAnswer');
-           
-            displayRiddle();  
-        }  
+function getPreviousButton (){
+    document.querySelectorAll('.js-previous').forEach((link) => {  
+        link.addEventListener('click', (e) => {  
+            e.preventDefault(); // Prevent default anchor behavior  
+            if (riddleHistory.length > 1) {  
+                riddleHistory.pop();  
+                currentRiddleIndex = riddleHistory[riddleHistory.length - 1];  
+    
+                const inputElement = document.querySelector(`.js-input-answer`);  
+    
+                inputElement.value = '';
+    
+                const answer = document.querySelector('.js-answer');
+                answer.classList.remove('showAnswer');
+               
+                displayRiddle();  
+            }  
+        });  
     });  
-});  
+
+}
 
 
 
 let scoreHtml = '';
-let isWorking = false;
 
-const score = {
-    win: 0,
-    loss: 0
+let score = JSON.parse(localStorage.getItem('score')) ;
+
+if(!score){
+    score= {
+        win: 0,
+        loss: 0
+    }
 }
 
-localStorage.getItem('score', JSON.stringify(score))
+function saveToStorage(){
+    localStorage.setItem('score', JSON.stringify(score));
+}
 
 // Answer display  
 document.querySelectorAll('.js-answer-btn').forEach((button) => {  
@@ -328,9 +343,11 @@ document.querySelectorAll('.js-answer-btn').forEach((button) => {
 
         const inputValue = inputElement.value.trim().toLowerCase(); 
 
-        const currentRiddle = riddles[currentRiddleIndex];  
+        const currentRiddle = riddles[currentRiddleIndex];
+        
+        let checkMatch = inputValue === currentRiddle.answer
 
-        if (inputValue === currentRiddle.answer) {  
+        if (checkMatch) {  
             inputElement.style.color = 'green'; 
      
             answer.classList.add('showAnswer');
@@ -345,7 +362,7 @@ document.querySelectorAll('.js-answer-btn').forEach((button) => {
         let lossScore = score.loss;
 
         // get the score inside the obj and update it from the game output.
-        
+
         getScore(winScore, lossScore);
         
     });  
@@ -376,15 +393,55 @@ function getScore(win, loss){
     
         gameOver.classList.toggle('game-over-display')
     
-        document.querySelector('.js-game-over-win').innerText= win;
+        document.querySelector('.js-game-over-win').innerText = win;
     
-        document.querySelector('.js-game-over-loss').innerText= loss;
+        document.querySelector('.js-game-over-loss').innerText = loss;
 
     })
+
+    // saveToStorage();
 }
 
 
-// function
+// continue button
+document.querySelector('.js-continue-btn').addEventListener('click', () => {
+    const gameOver = document.querySelector('.js-game-over');
+
+    gameOver.classList.remove('game-over-display');
+    saveToStorage();
+})
+
+// restart button 
+document.querySelector('.js-restart-button').addEventListener('click', () => {
+    currentRiddleIndex = 0;
+    riddleHistory = [currentRiddleIndex]
+
+    let previousRiddleIndex = currentRiddleIndex;
+    
+    do{
+        currentRiddleIndex = Math.floor(Math.random () * riddles.length);
+    }while (currentRiddleIndex === previousRiddleIndex);
+
+    let {win, loss} = score;
+    win = 0;
+    loss = 0;
+    
+    getScore(win, loss);
+
+    const gameOver = document.querySelector('.js-game-over');
+
+    gameOver.classList.remove('game-over-display');
+
+    const inputElement = document.querySelector(`.js-input-answer`);  
+    
+    inputElement.value = '';
+
+    const answer = document.querySelector('.js-answer');
+    answer.classList.remove('showAnswer');
+
+    displayRiddle();
+})
+
 
 
 // Search function  
@@ -395,3 +452,10 @@ function getScore(win, loss){
 //     console.log('Matches:', matches); 
      
 // });
+
+
+
+/**
+ * ##### problem ###
+ * for one riddle question onc
+ */
