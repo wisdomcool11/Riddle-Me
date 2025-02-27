@@ -243,4 +243,7 @@ export const riddles = [
 ]
 
 
+export let currentRiddleIndex = 0;
+export let riddleHistory = [currentRiddleIndex]
+
 

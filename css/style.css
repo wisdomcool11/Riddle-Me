@@ -1,227 +1,241 @@
-    
 
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
 
-body{
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    justify-content: center;
+* {  
+    box-sizing: border-box;  
+    padding: 0;  
+    margin: 0;  
+}  
+
+body {  
+    background-color: #eaf2f8; /* A light blue background */  
+    color: #2c3e50; /* Dark blue-gray text for contrast */  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    font-size: 1.1rem;  
+    font-weight: 500;  
+}  
+
+.container {  
+    width: 37.5rem;  
+    height: auto;  
+    padding: 2rem 1.5rem;  
+    border-radius: 1rem;  
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1); /* Softer shadow */  
+    margin-top: 2rem;  
+
+    /* Positioning */  
+    position: relative;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    background-color: #fff; /* White background for the container */  
+}  
+
+
+.riddle-wrap {  
+    width: 100%;  
+    height: 100%;  
+    display: flex;  
+    flex-direction: column;  
+    gap: 1rem;  
+}  
+
+.header {  
+    width: 100%;  
+    height: 100px;  
+    display: flex;  
+    justify-content: space-between;  
     align-items: center;
-    font-size: 1.1rem;
-    font-weight: 500;
+    padding: 0px 1rem;
+} 
+
+.timer{
+    align-self: flex-end;
+    font-size:  1rem ;
+    color: #e74c3c;
 }
 
-.container {
-    width: 37.5rem;
-    height: auto;
-    padding: 2rem 1.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 2px 10px 0 #ccc;
-    margin-top: 2rem;
-
-    /* positioning */
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.header{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.riddle-wrap{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.riddle-body{
-    width: 100%;
-    height: 100%;
-    padding: 1.5rem;
-    display: flex;
-    gap: 4rem;
-    position: relative;
-    /* overflow: hidden; */
-    scroll-behavior: smooth;
-}
-
-.riddle-card{
-    width: 100%;
-    height: 100%;
-    flex: 1 0 100%;
-    scroll-snap-align: start;
-    object-fit: cover;
-}
-
-.question{
-    width: 90%;
-    height: auto;
-    padding: 1.5rem 1rem;
-    margin: auto;
-    border-radius: 0.8rem;
-    box-shadow: 0 2px 10px 0 #ccc;
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
-    font-weight: 800;
-}
-
-.answer-wrap{
-    width: 100%;
-    height: 100%;
-    padding: 1.5rem 0.5rem;
-}
-
-/* input class container */
-.input{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-input{
-    width: 180px;
-    height: 30px;
-    padding: 0.6rem;
-    border-radius: 0.4rem;
-    outline: none;
-    border: 1px solid #ccc;
-    background-color: transparent;
-    color: #ccc;
-    text-align: center;
-}
-
-.answer-body{
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-.answer-btn{
-    background-color: #ccc ;
-    width: 160px;
-    height: 40px;
-    border-radius: 0.6rem;
-    border: none;
-    outline: none;
-    transition: all 300ms ease;
-}
-
-.answer-btn:hover{
-    transform: scale(1.1);
-    font-weight: 600;
-}
-
-.answer-btn:active{
-    transform: translateY(3px);
+.timer span {
+    font-size: 1.5rem;
 }
 
 
-.answer{
-    width: 200px;
-    height: 40px;
-    display: none;
-    padding-left: 3rem;
-    letter-spacing: 3px ;
-}
-.showAnswer.answer{
-    display: flex;
-    align-items: center;
-}
+.riddle-body {  
+    width: 100%;  
+    height: 100%;  
+    padding: 1.5rem;  
+    display: flex;  
+    gap: 4rem;  
+    position: relative;  
+    scroll-behavior: smooth; 
+    /* border: 2px solid yellow;  */
+}  
 
-.card-button{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    padding: 1rem;
-}
+.riddle-card {  
+    width: 100%;  
+    height: 100%;  
+    flex: 1 0 100%;  
+    scroll-snap-align: start;  
+    object-fit: cover;  
+}  
 
-/* riddle button */
-.button{
-    width: 120px;
-    height: 35px;
-    border: 2px solid #ccc;
-    border-radius: 0.4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    transition: 300ms ease-in;
-}
+.question {  
+    width: 90%;  
+    height: auto;  
+    padding: 1.5rem 1rem;  
+    margin: auto;  
+    border-radius: 0.8rem;  
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1); /* Softer shadow */  
+    font-family: 'Courier New', Courier, monospace;  
+    text-align: center;  
+    font-weight: 800;  
+    background: #d6eaf8; /* Light blue background for question section */  
+}  
 
-.button:active{
-    transform: translateY(5px);
-}
+.answer-wrap {  
+    width: 100%;  
+    height: 100%;  
+    padding: 1.5rem 0.5rem;  
+}  
 
-.next-btn{
-    color: springgreen;
-}
-.next-btn:active{
-    border-color: springgreen;
-}
+/* Input container */  
+.input {  
+    width: 100%;  
+    height: 100%;  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+}  
 
-.previous{
-    color: rgb(252, 87, 57);
-}
-.previous:active{
-    border-color: tomato;
-}
+input {  
+    width: 180px;  
+    height: 40px; /* Increased height for better usability */  
+    padding: 0.6rem;  
+    border-radius: 0.4rem;  
+    outline: none;  
+    border: 2px solid #3498db; /* Blue border for the input */  
+    background-color: #f4f6f7; /* Near white background */  
+    color: #2c3e50; /* Dark text for contrast */  
+    text-align: center;  
+}  
 
+.answer-body {  
+    width: 100%;  
+    height: 100%;  
+    padding: 1rem;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    gap: 0.6rem;  
+}  
 
-@media (max-width: 740px) {
-    .container{
-        width: 100%;
-        padding: 2rem;
-        box-shadow: none;
-        margin-top: 0px;
-    }
-    .riddle-wrap{
-        width: 37.5rem;
-        border-radius: 1rem;
-        box-shadow: 0 2px 10px 0 #ccc;
-        margin: 2rem auto 0px auto; 
-        padding: 1rem;
-    }
-}
+.answer-btn {  
+    background-color: #3498db; /* Blue buttons */  
+    color: white; /* White text on buttons */  
+    width: 160px;  
+    height: 40px;  
+    border-radius: 0.6rem;  
+    border: none;  
+    outline: none;  
+    transition: all 300ms ease;  
+}  
 
-@media (max-width: 460px) {
-    .container{
-        width: 100%;;
-        height: 100%;
-        padding: 1rem;
-        margin-top: 0px;
-    }
+.answer-btn:hover {  
+    background-color: #2980b9; /* Darker blue on hover */  
+}  
 
-    .riddle-wrap{
-        width: 100%;
-        /* height: 100vh; */
-        margin: 0px auto 0px auto; 
-        gap: 0.6rem;
-    }
-}
+.answer-btn:active {  
+    transform: translateY(3px);  
+}  
 
+.answer {  
+    width: 200px;  
+    height: 40px;  
+    display: none;  
+    padding-left: 3rem;  
+    letter-spacing: 3px;  
+}  
 
+.showAnswer.answer {  
+    display: flex;  
+    align-items: center;  
+}  
 
+.card-button {  
+    width: 100%;  
+    display: flex;  
+    justify-content: center;  
+    gap: 4rem;  
+    padding: 1rem;  
+}  
 
+/* Riddle button */  
+.button {  
+    width: 120px;  
+    height: 35px;  
+    border: 2px solid #3498db; /* Blue border */  
+    background-color: #fff; /* White button background */  
+    color: #3498db; /* Blue text */  
+    border-radius: 0.4rem;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    text-decoration: none;  
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  
+    transition: 300ms ease-in;  
+}  
+
+.button:active {  
+    transform: translateY(5px);  
+}  
+
+.next-btn {  
+    color: #2ecc71; /* Spring green */  
+}  
+
+.next-btn:active {  
+    border-color: #2ecc71; /* Green border on active */  
+}  
+
+.previous {  
+    color: #e74c3c; /* Red for previous */  
+}  
+
+.previous:active {  
+    border-color: #c0392b; /* Darker red on active */  
+}  
+
+@media (max-width: 740px) {  
+    .container {  
+        width: 100%;  
+        padding: 2rem;  
+        box-shadow: none;  
+        margin-top: 0px;  
+    }  
+
+    .riddle-wrap {  
+        width: 37.5rem;  
+        border-radius: 1rem;  
+        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1); /* Softer shadow */  
+        margin: 2rem auto 0px auto;   
+        padding: 1rem;  
+    }  
+}  
+
+@media (max-width: 460px) {  
+    .container {  
+        width: 100%;  
+        height: 100%;  
+        padding: 1rem;  
+        margin-top: 0px;  
+    }  
+
+    .riddle-wrap {  
+        width: 100%;  
+        margin: 0px auto 0px auto;   
+        gap: 0.6rem;  
+    }  
+}  
 

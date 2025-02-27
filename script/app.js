@@ -1,195 +1,7 @@
-// // importing files
-// import { riddles } from "../script/riddles.js";
-
-
-// let riddleHtml = '';
-
-// riddles.forEach((riddle) =>{
-
-//     riddleHtml =`
-//         <div class="riddle-card">
-                            
-//             <div class="question js-question">
-//                 ${riddle.question}
-//             </div>
-
-//             <div class="answer-wrap">
-
-//                 <div class ="input">
-//                     <input type="text" class="input-answer js-input-answer" placeholder="Your answer">
-//                 </div>
-
-//                <div class = "answer-body">
-
-//                     <div class ="answer-btn-wrap js-answer-btn-wrap">
-                    
-//                         <button class="answer-btn js-answer-btn js-answer-btn-${riddle.id}" data-riddle-id="${riddle.id}">
-//                             Answer
-//                         </button>
-
-//                     </div>
-
-//                     <p class="answer js-answer">
-//                         ${riddle.answer}
-//                     </p>
-//                </div>
-
-//             </div>
-            
-//             <div class="card-button">
-//                 <a href="#" class="previous button js-previous" data-riddle-id="${riddle.question}">
-//                     Previous
-//                 </a>
-
-//                 <a href="#" class="next-btn button js-next">
-//                     Next
-//                 </a>
-
-//             </div>
-
-//         </div>
-//     `;
-// })
-
-// document.querySelector('.riddle-body').innerHTML = riddleHtml;
-
-// // getting the current index of the riddle card
-// let currentRiddleIndex = 0;
-// let riddleHistory = [currentRiddleIndex];
-
-
-// // display the initial riddle
-// displayRiddle();
-
-// // creating the display function
-
-// function displayRiddle (){
-//     let currentRiddle = riddles[currentRiddleIndex];
-
-//     document.querySelector('.js-question').innerHTML = `${currentRiddle.question}`;
-
-//     document.querySelector('.js-answer').innerHTML = `${currentRiddle.answer}`;
-
-//     document.querySelector(`.js-answer-btn-wrap`).innerHTML =`
-//         <button class="answer-btn js-answer-btn js-answer-btn-${currentRiddle.id}" data-riddle-id = "${currentRiddle.id}">
-//             Answer
-//         </button>  
-//     `;
-
-//     console.log(currentRiddle.id);
-
-// }
-
-
-
-// //  next riddle link
-// document.querySelectorAll('.js-next').forEach((link) => {
-//     link.addEventListener('click', () => {
-//         const riddleBody = document.querySelector('.js-riddle-body');
-
-//         riddleBody.classList.remove('showAnswer');
-
-//         const inputElement = document.querySelector(`.js-input-answer`);  
-//         inputElement.value = '';
-
-//         nextRiddleLink();
-//     })
-// })
-
-
-
-// function nextRiddleLink(){
-//     let previousRiddleIndex = currentRiddleIndex;
-
-//     do{
-//         currentRiddleIndex = Math.floor(Math.random () * riddles.length);
-//     }while (currentRiddleIndex === previousRiddleIndex)
-
-//     riddleHistory.push(currentRiddleIndex);
-
-//     displayRiddle()
-// }
-
-// // previous riddle link
-// document.querySelectorAll('.js-previous').forEach((link) => {
-//     link.addEventListener('click', () => {
-//         const riddleBody = document.querySelector('.js-riddle-body');
-
-//         riddleBody.classList.remove('showAnswer');
-
-//         const inputElement = document.querySelector(`.js-input-answer`);  
-//         inputElement.value = '';
-    
-
-//         previousRiddleLink();
-//     })
-// })
-
-// function previousRiddleLink (){
-//     // check if their is a previous riddle
-//     if(riddleHistory.length > 1){
-//         riddleHistory.pop();
-
-//         // update the current fruit index
-//         currentRiddleIndex = riddleHistory[riddleHistory.length - 1];
-
-//         displayRiddle();
-//     }
-// }
-
-// // answer display 
-
-// document.querySelectorAll('.js-answer-btn').forEach((button) => {  
-//     button.addEventListener('click', () => {  
-//         const riddleId = button.dataset.riddleId;  
-//         // container  
-//         const riddleBody = document.querySelector('.js-riddle-body');  
-
-//         // getting the input   
-//         const inputElement = document.querySelector(`.js-input-answer`);  
-//         const inputValue = inputElement.value.trim();  
-
-//         let riddleAnswer = '';   
-
-//         riddles.forEach((riddle) => {  
-//             if (riddle.id === riddleId) {  
-//                 riddleAnswer = riddle.answer; 
-//             }  
-//         });  
-
-//         // if (inputValue === '') {  
-//         //     inputElement.value = 'Enter an answer';  
-//         //     inputElement.style.borderColor = 'red';  
-
-//         //     setTimeout(() => {  
-//         //         inputElement.value = '';  
-//         //         inputElement.style.borderColor = '#ccc';  
-//         //     }, 1300);  
-//         //     return; // Exit early if input is empty  
-//         // }   
-
-//         if (riddleAnswer === inputValue) {  
-//             inputElement.style.color = 'green';  
-//             riddleBody.classList.toggle('showAnswer');  
-//         } else {  
-//             inputElement.style.textDecoration = "line-through";  
-//             inputElement.style.textDecorationColor = 'red';  
-
-//             setTimeout(() => {  
-//                 inputElement.value = '';  
-//                 inputElement.style.textDecoration = "none";  
-//             }, 1500);  
-//         }  
-
-//         console.log('input Answer: ' + inputValue);  
-//         console.log('riddle Answer: ' + riddleAnswer);  
-//         console.log(riddleId);  
-//     });  
-// });
-
 
 // importing files  
-import {riddles} from "../script/riddles.js";  
+import {riddles} from "../script/riddles.js"; 
+// import { startTimer } from "../script/timer.js";/ 
 
 let riddleHtml = '';  
 
@@ -240,102 +52,84 @@ riddles.forEach((riddle) => {
 document.querySelector('.riddle-body').innerHTML = riddleHtml;  
 
 let currentRiddleIndex = 0;  
-let riddleHistory = [currentRiddleIndex];  
+let riddleHistory = [currentRiddleIndex]; 
 
+
+// initialize scores
+let score = JSON.parse(localStorage.getItem('score')) || { win: 0, loss: 0};
+
+// display initial score
+getScore (score.win, score.loss);
 displayRiddle();  
 
 // display function of the current riddle
 function displayRiddle() {  
     const currentRiddle = riddles[currentRiddleIndex];  
-
     document.querySelector('.js-question').innerHTML= currentRiddle.question;  
-
     document.querySelector('.js-answer').innerHTML= currentRiddle.answer;  
 }  
 
 // next riddle link
-getNextButton();
 
-function getNextButton (){
-    document.querySelectorAll('.js-next').forEach((link) => {  
-        link.addEventListener('click', (e) => {  
-            e.preventDefault(); // Prevent default anchor behavior
-    
-            let previousRiddleIndex = currentRiddleIndex;
-    
-            do{
-                currentRiddleIndex = Math.floor(Math.random () * riddles.length);
-            }while (currentRiddleIndex === previousRiddleIndex);
-    
-            if (currentRiddleIndex < riddles.length - 1) {  
-                currentRiddleIndex++;  
-                riddleHistory.push(currentRiddleIndex);  
-    
-                const inputElement = document.querySelector(`.js-input-answer`);  
-    
-                inputElement.value = '';
-    
-                const answer = document.querySelector('.js-answer');
-                answer.classList.remove('showAnswer');
-    
-                displayRiddle();  
-            }  
-        });  
+
+document.querySelectorAll('.js-next').forEach((link) => {  
+    link.addEventListener('click', (e) => {  
+        e.preventDefault(); // Prevent default anchor behavior
+
+        nextRiddle();
     });  
+});  
 
+function nextRiddle (){
+    let previousRiddleIndex = currentRiddleIndex;
+    
+    do{
+        currentRiddleIndex = Math.floor(Math.random () * riddles.length);
+    }while (currentRiddleIndex === previousRiddleIndex);
+
+    if (currentRiddleIndex < riddles.length - 1) {  
+        currentRiddleIndex++;  
+        riddleHistory.push(currentRiddleIndex);  
+
+        const inputElement = document.querySelector(`.js-input-answer`);  
+
+        inputElement.value = '';
+
+        const answer = document.querySelector('.js-answer');
+        answer.classList.remove('showAnswer');
+
+        displayRiddle();  
+    }  
 }
 
 
 // previous riddle link 
-getPreviousButton ();
 
-function getPreviousButton (){
-    document.querySelectorAll('.js-previous').forEach((link) => {  
-        link.addEventListener('click', (e) => {  
-            e.preventDefault(); // Prevent default anchor behavior  
-            if (riddleHistory.length > 1) {  
-                riddleHistory.pop();  
-                currentRiddleIndex = riddleHistory[riddleHistory.length - 1];  
+document.querySelectorAll('.js-previous').forEach((link) => {  
+    link.addEventListener('click', (e) => {  
+        e.preventDefault(); // Prevent default anchor behavior  
+        
+        if (riddleHistory.length > 1) {  
+            riddleHistory.pop();  
+            currentRiddleIndex = riddleHistory[riddleHistory.length - 1];  
     
-                const inputElement = document.querySelector(`.js-input-answer`);  
+            const inputElement = document.querySelector(`.js-input-answer`);  
     
-                inputElement.value = '';
+            inputElement.value = '';
     
-                const answer = document.querySelector('.js-answer');
-                answer.classList.remove('showAnswer');
-               
-                displayRiddle();  
-            }  
-        });  
+            const answer = document.querySelector('.js-answer');
+            answer.classList.remove('showAnswer');
+           
+            displayRiddle();  
+        }  
     });  
+});  
 
-}
-
-
-
-let scoreHtml = '';
-
-let score = JSON.parse(localStorage.getItem('score')) ;
-
-if(!score){
-    score= {
-        win: 0,
-        loss: 0
-    }
-}
-
-function saveToStorage(){
-    localStorage.setItem('score', JSON.stringify(score));
-}
 
 // Answer display  
 document.querySelectorAll('.js-answer-btn').forEach((button) => {  
-    
-    // let win = 0;
-    // let loss = 0;
 
     button.addEventListener('click', () => {  
-        const riddleId = button.dataset.riddleId; 
 
         const inputElement = document.querySelector(`.js-input-answer`);  
 
@@ -344,34 +138,42 @@ document.querySelectorAll('.js-answer-btn').forEach((button) => {
         const inputValue = inputElement.value.trim().toLowerCase(); 
 
         const currentRiddle = riddles[currentRiddleIndex];
-        
-        let checkMatch = inputValue === currentRiddle.answer
 
-        if (checkMatch) {  
-            inputElement.style.color = 'green'; 
-     
-            answer.classList.add('showAnswer');
-            score.win += 1;
+        if (inputValue === currentRiddle.answer.toLowerCase()) { 
+            showAnswer(inputElement, answer);
+            loadNewRiddle();
 
         } else {  
             inputElement.style.color = 'red';  
-            score.loss += 1;
+            score.loss += 1; // increment loss score 
+            localStorage.getItem('score', JSON.stringify(score));
         }  
-
-        let winScore = score.win;
-        let lossScore = score.loss;
 
         // get the score inside the obj and update it from the game output.
 
-        getScore(winScore, lossScore);
+        getScore(score.win, score.loss);
         
     });  
     
-});  
+}); 
+
+function showAnswer (inputElement,answer){
+    inputElement.style.color = 'green'; 
+
+    score.win += 1; // increment win score
+    localStorage.setItem('score', JSON.stringify(score));// save update score
+
+    answer.classList.add('showAnswer');
+
+    // once the riddle answer is correct move to the nexgt riddle after one minute three seconds.
+    setTimeout(()=>{
+        nextRiddle();
+    },3200)
+}
 
 
 function getScore(win, loss){
-    scoreHtml = ` 
+    const scoreHtml = ` 
         <span class="wins">
             Wins : <span class="score-win js-score-win">
                 ${win}
@@ -389,6 +191,7 @@ function getScore(win, loss){
 
     //  Tired button that bring game over pop up
     document.querySelector('.js-tired').addEventListener('click', ()=> {
+
         const gameOver = document.querySelector('.js-game-over');
     
         gameOver.classList.toggle('game-over-display')
@@ -397,9 +200,10 @@ function getScore(win, loss){
     
         document.querySelector('.js-game-over-loss').innerText = loss;
 
+        clearInterval(timer)
+
     })
 
-    // saveToStorage();
 }
 
 
@@ -408,7 +212,7 @@ document.querySelector('.js-continue-btn').addEventListener('click', () => {
     const gameOver = document.querySelector('.js-game-over');
 
     gameOver.classList.remove('game-over-display');
-    saveToStorage();
+    startTimer();
 })
 
 // restart button 
@@ -422,11 +226,11 @@ document.querySelector('.js-restart-button').addEventListener('click', () => {
         currentRiddleIndex = Math.floor(Math.random () * riddles.length);
     }while (currentRiddleIndex === previousRiddleIndex);
 
-    let {win, loss} = score;
-    win = 0;
-    loss = 0;
+    // reset scores
+    score.win = 0;
+    score.loss = 0;
     
-    getScore(win, loss);
+    getScore(score.win, score.loss); // display the reset score 
 
     const gameOver = document.querySelector('.js-game-over');
 
@@ -439,23 +243,61 @@ document.querySelector('.js-restart-button').addEventListener('click', () => {
     const answer = document.querySelector('.js-answer');
     answer.classList.remove('showAnswer');
 
+    startTimer();
     displayRiddle();
 })
 
 
+// start timer ####
+// timer script file
 
-// Search function  
-// document.querySelector('.js-input-answer').addEventListener('input', (e) => {  
-
-//     const searchValue = e.target.value.trim().toLowerCase();  
-//     const matches = riddles.filter(riddle => riddle.name.toLowerCase().includes(searchValue));  
-//     console.log('Matches:', matches); 
-     
-// });
+let timeLimit = 30 ; // setting timer in seconds
+let timer ; //variable to hold the time interval
+// let losses = 0; //variable to track losses
 
 
+function startTimer() {
+    let timerRemaining = timeLimit;
 
-/**
- * ##### problem ###
- * for one riddle question onc
- */
+    document.querySelector ('.js-timer').innerText = `Riddle time: ${timerRemaining}`;
+
+    timer = setInterval (()=> {
+        timerRemaining --;
+        document.querySelector ('.js-timer').innerText = `Riddle time: ${timerRemaining}`;
+
+        if(timerRemaining <= 0){
+            clearInterval(timer);
+
+            handleTimeOut ();; //call function to handle timeout!
+        }
+
+    }, 1000)
+}
+
+function handleTimeOut(){
+    //logic to load the next  riddle  goes  here
+    nextRiddle();
+    // reset timer  for the next riddle
+    clearInterval(timer);
+    startTimer(); // Restart the timer again
+}
+
+// call startTimer  when the  riddle is displayed 
+startTimer();
+
+
+// call this function to load a new riddle
+// this will take in an arguement ( nextriddle to load new riddle);
+
+function loadNewRiddle () {
+    // existing code logic to load new riddle 
+    displayRiddle();
+
+    clearInterval(timer);// stop timer 
+    startTimer(); //start the timer for the new riddle
+}
+
+
+
+//import and merge the two files to work well###
+
