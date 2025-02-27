@@ -173,8 +173,8 @@ input {
 
 /* Riddle button */  
 .button {  
-    width: 120px;  
-    height: 35px;  
+    width: 7.5rem;  
+    height: 2.187rem;  
     border: 2px solid #3498db; /* Blue border */  
     background-color: #fff; /* White button background */  
     color: #3498db; /* Blue text */  
@@ -211,7 +211,7 @@ input {
     .container {  
         width: 100%;  
         padding: 2rem;  
-        box-shadow: none;  
+        box-shadow: none;
         margin-top: 0px;  
     }  
 
@@ -222,6 +222,14 @@ input {
         margin: 2rem auto 0px auto;   
         padding: 1rem;  
     }  
+
+    .riddle-head{
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+    .timer{
+        font-size: 1.2rem;
+    }
 }  
 
 @media (max-width: 460px) {  
@@ -237,5 +245,24 @@ input {
         margin: 0px auto 0px auto;   
         gap: 0.6rem;  
     }  
+
+    .riddle-head, .scores{
+        font-size: 1.1rem;
+    }
+    .timer{
+        font-size: 1rem;
+    }
+    .answer-body{
+        gap: 0.3rem
+    }
+
+    .answer-btn{
+        width: 120px;
+    }
+    .answer{
+        width: max-content;
+        padding: 0px 2px;
+    }
+
 }  
 

@@ -91,3 +91,14 @@
 .game-btn:active {  
     background-color: #1f618d; /* Even darker blue on active */  
 }  
+
+
+@media (max-width: 460px) {
+    .card-button{
+        padding: 0.8rem;
+        gap: 1.2rem;
+    }
+    .button{
+        width: 100%;
+    }
+}

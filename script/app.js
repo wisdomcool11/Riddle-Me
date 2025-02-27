@@ -22,7 +22,7 @@ riddles.forEach((riddle) => {
 
                     <div class="answer-btn-wrap js-answer-btn-wrap"> 
 
-                        <button class="answer-btn js-answer-btn" data-riddle-id="${riddle.id}">  
+                        <button class="answer-btn js-answer-btn">  
                             Answer  
                         </button>  
 
@@ -253,7 +253,7 @@ document.querySelector('.js-restart-button').addEventListener('click', () => {
 
 let timeLimit = 30 ; // setting timer in seconds
 let timer ; //variable to hold the time interval
-// let losses = 0; //variable to track losses
+let losses = 0; //variable to track losses
 
 
 function startTimer() {
